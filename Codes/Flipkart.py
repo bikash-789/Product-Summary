@@ -27,27 +27,6 @@ from selenium.webdriver.chrome.options import Options
 
 """
 
-def scrape_reviews_flipkart(product_link):
-    options = Options()
-    options.add_argument('--headless')
-
-    wbD = webdriver.Chrome(options=options)
-
-    reviews = []
-    # print(product_link)
-    # Check if the product link is not None
-    if product_link is not None or product_link != "":
-        wbD.get(product_link)
-        time.sleep(2)
-
-        # Scrape the reviews
-        review_elements = wbD.find_elements(by='xpath', value='//*[@class="_6K-7Co" or @class="t-ZTKy"]')
-        for review_element in review_elements:
-            review_text = review_element.text
-            reviews.append(review_text)
-
-    return reviews
-
 
 def scrape_product_details_flipkart(product_link):
     options = Options()
@@ -59,20 +38,26 @@ def scrape_product_details_flipkart(product_link):
 
     if product_link is not None or product_link != "":
         wbD.get(product_link)
-        time.sleep(2)
+        time.sleep(1)
         # class="t-ZTKy"
         #         Product info
         name_element = wbD.find_elements(by='xpath', value='.//span[@class="B_NuCI"]')
         price_element = wbD.find_elements(by='xpath', value='.//div[@class="_30jeq3 _16Jk6d"]')
         rating_element = wbD.find_elements(by='xpath', value='.//div[@class="_3LWZlK"]')
-        # review_elements = wbD.find_elements(by='xpath', value='//div[@class="t-ZTKy"]')
+        image_element = wbD.find_elements(by='xpath', value='.//img[@class="_396cs4 _2amPTt _3qGmMb"]')
+        review_elements = wbD.find_elements(by='xpath', value='.//*[@class="_6K-7Co" or @class="t-ZTKy"]')
 
-        review_collection = scrape_reviews_flipkart(product_link)
+        review_collection = []
+
+        for review_element in review_elements:
+            review_text = review_element.text
+            review_collection.append(review_text)
 
         name = None
         price = None
         rating = None
         reviews = None
+        image = None
 
         if name_element:
             name = name_element[0].text
@@ -82,6 +67,8 @@ def scrape_product_details_flipkart(product_link):
             rating = rating_element[0].text
         if len(review_collection) != 0:
             reviews = review_collection
+        if len(image_element) != 0:
+            image = image_element[0].get_attribute('src')
 
         #         Create a dictionary for data info
         product_info = {
@@ -89,7 +76,8 @@ def scrape_product_details_flipkart(product_link):
             "Price": price,
             "Rating": rating,
             "Reviews": reviews,
-            "Product Link": product_link
+            "Product Link": product_link,
+            "Image": image
         }
 
     return product_info
@@ -102,6 +90,7 @@ def web_scraping_flipkart(link):
     web_driver = webdriver.Chrome(options=options)
 
     web_driver.get(link)
+    time.sleep(1)
 
     related_products = []
     # //*[@data-component-type="s-search-result"]
@@ -109,9 +98,9 @@ def web_scraping_flipkart(link):
                                                 value='//*[@class="_2kHMtA" or contains(@class, "_4ddWXP")]')
 
     for product in product_elements:
-        time.sleep(2)
         # extract product detail link
-        product_detail_link = product.find_elements(by='xpath', value='(.//a[@class="_1fQZEK"]) | (.//a[@class="_2rpwqI"])')
+        product_detail_link = product.find_elements(by='xpath',
+                                                    value='(.//a[@class="_1fQZEK"]) | (.//a[@class="_2rpwqI"])')
 
         final_product_link = None
         if len(product_detail_link) != 0:
@@ -127,12 +116,13 @@ def web_scraping_flipkart(link):
     return related_products
 
 
-key = input('Enter product to search: ')
-link = 'https://www.flipkart.com/search?q=' + key
+if __name__ == '__main__':
+    key = input('Enter product to search: ')
+    link = 'https://www.flipkart.com/search?q=' + key
 
-products = web_scraping_flipkart(link)
-# Save the data to a CSV file
-df = pd.DataFrame(products)
-df.to_csv('Flipkart_Product_' + key + '.csv')
+    products = web_scraping_flipkart(link)
+    # Save the data to a CSV file
+    df = pd.DataFrame(products)
+    df.to_csv('./FlipkartProducts/Flipkart_Product_' + key + '.csv')
 
-print(products)
+    print(products)
