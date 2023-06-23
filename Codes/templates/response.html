@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Creative - Start Bootstrap Theme</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap Icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+        <!-- SimpleLightbox plugin CSS-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+    </head>
+    <body>
+    <div class="container">
+        <br><br>
+        <center><h1 class="animate-charcter"> {{search_word}} Product results</h1></center>
+        <section>
+        <br><br>
+        <center><h3>{{numrows}} Records Found</h3></center>
+        <br>
+        <table class="center">
+          <thead>
+              <tr>
+                 <th>Name</th>
+                 <th>Price</th>
+                 <th>Rating</th>
+                 <th>Rsum</th>
+                 <th>Link</th>
+              </tr>
+          </thead>
+          <tbody>
+        {% for row in product %}
+           <tr>
+            <td>{{row.Name}}</td>
+            <td>{{row.Price}}</td>
+            <td>{{row.Rating}}</td>
+            <td>{{row.Rsum}}</td>
+            <td>{{row.Link}}</td>
+           </tr>
+        {% endfor %}
+          </tbody>
+        </table>
+            </section>
+    </div>
+    <style>
+body {
+  height: 100vh; /* Adjust the height as needed */
+  overflow: auto;
+  background: radial-gradient(at 18% 99%, rgb(223, 229, 113) 0px, transparent 50%) repeat scroll 0% 0%,
+              radial-gradient(at 97% 8%, rgb(118, 249, 173) 0px, transparent 50%) repeat scroll 0% 0%,
+              radial-gradient(at 79% 82%, rgb(233, 109, 131) 0px, transparent 50%) repeat scroll 0% 0%,
+              radial-gradient(at 96% 10%, rgb(222, 81, 251) 0px, transparent 50%) repeat scroll 0% 0%,
+              radial-gradient(at 42% 20%, rgb(116, 240, 251) 0px, transparent 50%) repeat scroll 0% 0%,
+              radial-gradient(at 4% 49%, rgb(203, 88, 218) 0px, transparent 50%) repeat scroll 0% 0%, rgba(0, 0, 0, 0) radial-gradient(at 57% 33%, rgb(218, 83, 228) 0px, #a299ff 50%) repeat scroll 0% 0%;
+  background-attachment: fixed;
+  padding: 20px; /* Adjust padding as needed */
+  width: 100vw; /* Set width to viewport width */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+    .center {
+          margin-left: auto;
+          margin-right: auto;
+        }
+    table, th, tr, td {
+      border: 1px solid;
+    }
+    table {
+      width: 80%;
+    }
+    tr{
+        height: 80px;
+    }
+    th, td{
+        text-align: center;
+    }
+    .animate-charcter
+    {
+       text-transform: uppercase;
+      background-image: linear-gradient(
+        -225deg,
+        #231557 0%,
+        #44107a 29%,
+        #ff1361 67%,
+        #fff800 100%
+      );
+      background-size: auto auto;
+      background-clip: border-box;
+      background-size: 200% auto;
+      color: #fff;
+      background-clip: text;
+      text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textclip 2s linear infinite;
+      display: inline-block;
+          font-size: 60px;
+    }
+
+    @keyframes textclip {
+      to {
+        background-position: 200% center;
+      }
+    }
+
+    </style>
+    </body>
+</html>
