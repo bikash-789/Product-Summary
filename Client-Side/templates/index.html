@@ -69,25 +69,13 @@
                 <hr class="divider" />
             </div>
             <div class="container search-table">
-                        <div class="search-box">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h5>Search Product Name</h5>
-                                </div>
-                                <div class="col-md-9">
-                                    <form action="/search/products" method="POST">
-                                    <input type="text" name="key" id="search_text" class="form-control" placeholder="What are you looking for?   Eg: Vivo Z1">
-                                    <br>
-                                    <input type="submit" value="Search">
-                                    </form>
-                                </div>
                     <div class="search-box">
                         <div class="row">
                             <div class="col-md-3">
                                 <h5>Search Product Name</h5>
                             </div>
                             <div class="col-md-9">
-                                <form action="{{ url_for('searching')}}" method="post">
+                                <form action="/search/products" method="post">
                                     <center>
                                     <input type="text" name="key" id="search_text" class="form-control" placeholder="What are you looking for?   Eg: Vivo Z1"/>
                                         <br>
