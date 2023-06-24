@@ -25,7 +25,7 @@
         <center><h1 class="animate-charcter"> Search Results for {{ key }}</h1></center>
         <section>
         <br><br>
-        <center><h3>{{ num_products }} Records Found</h3></center>
+        <center><h3> Amazon search results </h3></center>
         <br>
         <table class="center">
           <thead>
@@ -54,6 +54,39 @@
         {% endfor %}
           </tbody>
         </table>
+
+            <br/>
+            <center><h3> Flipkart search results </h3></center>
+        <br>
+        <table class="center">
+          <thead>
+              <tr>
+                 <th>Name</th>
+                 <th>Price</th>
+                 <th>Rating</th>
+                 <th>Product Link</th>
+                 <th>Product Image</th>
+                  <th>Reviews</th>
+              </tr>
+          </thead>
+          <tbody>
+        {% for product in flipkart %}
+           <tr>
+            <td>{{ product['Name'] }}</td>
+            <td>{{ product['Price']}}</td>
+            <td>{{product['Rating']}}</td>
+            <td><a href="{{product['Product Link']}}" target="_blank">Product Link</a></td>
+            <td>
+                <img src="{{ product['Image'] }}" alt="product-image" width="300px" height="400px"/>
+
+            </td>
+               <td>{{ product['Reviews'][0] }}</td>
+           </tr>
+        {% endfor %}
+          </tbody>
+        </table>
+
+
             </section>
     </div>
     <style>
