@@ -69,23 +69,36 @@
                 <hr class="divider" />
             </div>
             <div class="container search-table">
-                        <div class="search-box">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <h5>Search Product Name</h5>
-                                </div>
-                                <div class="col-md-9">
-                                    <form action="{{ url_for('searching')}}" method="post">
-                                    <input type="text" name="search_text" id="search_text" class="form-control" placeholder="What are you looking for?   Eg: Vivo Z1">
-                                    <br>
-                                    <center><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></center>
-                                    </form>
-                                </div>
+                    <div class="search-box">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5>Search Product Name</h5>
+                            </div>
+                            <div class="col-md-9">
+                                <form action="{{ url_for('searching')}}" method="post">
+                                    <center>
+                                    <input type="text" name="search_text" id="search_text" class="form-control" placeholder="What are you looking for?   Eg: Vivo Z1"/>
+                                        <br>
+                                    <button class="hover-button" type="submit">Search</button></center>
+                                </form>
                             </div>
                         </div>
-               <div id="result"></div>
+                    </div>
             </div>
             <style>
+            .hover-button {
+              background-color: #fff;
+              color: #000000;
+              border-radius: 8px;
+              padding: 10px 20px;
+              border: none;
+              cursor: pointer;
+            }
+
+            .hover-button:hover {
+              background-color:  #00ffff;
+            }
+
             .search-table{
                 padding: 7%;
                 margin-top: -6%;
