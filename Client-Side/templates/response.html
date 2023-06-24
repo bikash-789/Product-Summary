@@ -22,10 +22,10 @@
     <body>
     <div class="container">
         <br><br>
-        <center><h1 class="animate-charcter"> {{search_word}} Product results</h1></center>
+        <center><h1 class="animate-charcter"> Search Results for {{ key }}</h1></center>
         <section>
         <br><br>
-        <center><h3>{{numrows}} Records Found</h3></center>
+        <center><h3>{{ num_products }} Records Found</h3></center>
         <br>
         <table class="center">
           <thead>
@@ -33,18 +33,23 @@
                  <th>Name</th>
                  <th>Price</th>
                  <th>Rating</th>
-                 <th>Rsum</th>
-                 <th>Link</th>
+                 <th>Product Link</th>
+                 <th>Product Image</th>
+                  <th>Reviews</th>
               </tr>
           </thead>
           <tbody>
-        {% for row in product %}
+        {% for product in amazon %}
            <tr>
-            <td>{{row.Name}}</td>
-            <td>{{row.Price}}</td>
-            <td>{{row.Rating}}</td>
-            <td>{{row.Rsum}}</td>
-            <td>{{row.Link}}</td>
+            <td>{{ product['Name'] }}</td>
+            <td>{{ product['Price']}}</td>
+            <td>{{product['Rating']}}</td>
+            <td><a href="{{product['Product Link']}}" target="_blank">Product Link</a></td>
+            <td>
+                <img src="{{ product['Image'] }}" alt="product-image" width="300px" height="400px"/>
+
+            </td>
+               <td>{{ product['Reviews'][0] }}</td>
            </tr>
         {% endfor %}
           </tbody>

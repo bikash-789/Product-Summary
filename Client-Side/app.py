@@ -1,35 +1,30 @@
 from flask import Flask, render_template, request, jsonify
-from flask_mysqldb import MySQL, MySQLdb
+from main import search_product
+from rq import Queue
+from redis import Redis
+import time
+
+import sys
+
+sys.path.append('../Web-Scraping/Client-Side')
+
 app = Flask(__name__)
-app.secret_key = "caircocoders-ednalan"
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'aiproject'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-mysql = MySQL(app)
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
-@app.route("/searching", methods=["POST", "GET"])
-def searching():
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == 'POST':
-        search_word = request.form['search_text']
-        print(search_word)
-        '''if search_word == '':
-            query = "SELECT * from employee ORDER BY id"
-            cur.execute(query)
-            employee = cur.fetchall()
-        else:'''
-        query = "SELECT * from products WHERE Name LIKE '%{}%' ".format(
-                search_word, search_word, search_word)
-        cur.execute(query)
-        numrows = int(cur.rowcount)
-        product = cur.fetchall()
-        print(numrows)
-        return render_template('response.html', product=product, numrows=numrows, search_word=search_word)
-    return render_template('index.html')
-    #return jsonify({'htmlresponse': render_template('response.html', employee=employee, numrows=numrows)})
-if __name__ == "__main__":
-    app.run(debug=True)
+
+
+@app.route('/search/products', methods=["POST"])
+def get_products():
+    key = request.form['key']
+    related_products = search_product(key)
+    amazon = related_products['Amazon']
+    flipkart = related_products['Flipkart']
+    num_products = len(related_products)
+    return render_template('response.html', amazon=amazon, flipkart=flipkart, num_products=num_products, key=key)
+
+
+if __name__ == '__main__':
+    app.run()

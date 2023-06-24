@@ -1,0 +1,33 @@
+<!-- loading.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loading...</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var job_id = "{{ job_id }}";
+
+            function pollJob() {
+                $.get("/poll_job/" + job_id, function (data) {
+                    if (data.status === "completed") {
+                        // Redirect to results page
+                        window.location.href = "/results/" + job_id;
+                    } else if (data.status === "running") {
+                        // Continue polling
+                        setTimeout(pollJob, 2000);
+                    } else {
+                        // Handle error
+                        alert("An error occurred. Please try again later.");
+                    }
+                });
+            }
+
+            pollJob();
+        });
+    </script>
+</head>
+<body>
+    <p>Please wait while we search for the products. Job ID: {{ job_id }}</p>
+</body>
+</html>
