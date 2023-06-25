@@ -20,135 +20,134 @@
         <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
     </head>
     <body>
-    <div class="container">
-        <br><br>
-        <center><h1 class="animate-charcter"> Search Results for {{ key }}</h1></center>
-        <section>
-        <br><br>
-        <center><h3> Amazon search results </h3></center>
-        <br>
-        <table class="center">
-          <thead>
-              <tr>
-                 <th>Name</th>
-                 <th>Price</th>
-                 <th>Rating</th>
-                 <th>Product Link</th>
-                 <th>Product Image</th>
-                  <th>Reviews</th>
-              </tr>
-          </thead>
-          <tbody>
-        {% for product in amazon %}
-           <tr>
-            <td>{{ product['Name'] }}</td>
-            <td>{{ product['Price']}}</td>
-            <td>{{product['Rating']}}</td>
-            <td><a href="{{product['Product Link']}}" target="_blank">Product Link</a></td>
-            <td>
-                <img src="{{ product['Image'] }}" alt="product-image" width="300px" height="400px"/>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <h1>Amazon Search Results</h1>
+                {% for product in amazon %}
+        <!--    Product  -->
+        <div class="row p-4 product-container">
+            <div class="col-6">
+                <div class="card" style="width: 14rem;">
+                    <img src="{{product['Image']}}" class="card-img-top" alt="product-image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product['Name']}}</h5>
+                        <p class="card-text"><i class="bi bi-currency-rupee"></i> {{product['Price']}}</p>
+                        <a href="{{product['Product Link']}}" class="btn btn-primary">Visit Site</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+<!--                Intro   -->
+                <div class="container">
+                    <h2>Intro</h2>
+                    <p>{{product['Name']}}</p>
+                </div>
+<!--                Product Information -->
+                <div class="container d-flex flex-column">
+                    <h5>Product Information</h5>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>Price</td>
+                            <td>{{product['Price']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Rating</td>
+                            <td>{{product['Rating']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Reviews</td>
+                            <td class="w-100 text-wrap text-break">
+                                <p>
+                                {{product['Reviews']}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Product Summary</td>
+                            <td>Overall, this is the best product!</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br/>
+            {% endfor %}
+            </div>
 
-            </td>
-               <td>{{ product['Reviews'][0] }}</td>
-           </tr>
-        {% endfor %}
-          </tbody>
-        </table>
-
-            <br/>
-            <center><h3> Flipkart search results </h3></center>
-        <br>
-        <table class="center">
-          <thead>
-              <tr>
-                 <th>Name</th>
-                 <th>Price</th>
-                 <th>Rating</th>
-                 <th>Product Link</th>
-                 <th>Product Image</th>
-                  <th>Reviews</th>
-              </tr>
-          </thead>
-          <tbody>
-        {% for product in flipkart %}
-           <tr>
-            <td>{{ product['Name'] }}</td>
-            <td>{{ product['Price']}}</td>
-            <td>{{product['Rating']}}</td>
-            <td><a href="{{product['Product Link']}}" target="_blank">Product Link</a></td>
-            <td>
-                <img src="{{ product['Image'] }}" alt="product-image" width="300px" height="400px"/>
-
-            </td>
-               <td>{{ product['Reviews'][0] }}</td>
-           </tr>
-        {% endfor %}
-          </tbody>
-        </table>
-
-
-            </section>
-    </div>
+            <div class="col-12 col-md-6">
+                <h1>Flipkart Search Results</h1>
+                {% for product in flipkart %}
+        <!--    Product  -->
+        <div class="row p-4 product-container">
+            <div class="col-6">
+                <div class="card" style="width: 14rem;">
+                    <img src="{{product['Image']}}" class="card-img-top" alt="product-image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product['Name']}}</h5>
+                        <p class="card-text"><i class="bi bi-currency-rupee"></i> {{product['Price']}}</p>
+                        <a href="{{product['Product Link']}}" class="btn btn-primary">Visit Site</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+<!--                Intro   -->
+                <div class="container">
+                    <h2>Intro</h2>
+                    <p>{{product['Name']}}</p>
+                </div>
+<!--                Product Information -->
+                <div class="container d-flex flex-column">
+                    <h5>Product Information</h5>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>Price</td>
+                            <td>{{product['Price']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Rating</td>
+                            <td>{{product['Rating']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Reviews</td>
+                            <td class="w-100 text-wrap text-break">
+                                <p>
+                                {{product['Reviews']}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Product Summary</td>
+                            <td>Overall, this is the best product!</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br/>
+            {% endfor %}
+            </div>
+        </div>
+            </div>
     <style>
-body {
-  height: 100vh; /* Adjust the height as needed */
-  overflow: auto;
-  background: radial-gradient(at 18% 99%, rgb(223, 229, 113) 0px, transparent 50%) repeat scroll 0% 0%,
-              radial-gradient(at 97% 8%, rgb(118, 249, 173) 0px, transparent 50%) repeat scroll 0% 0%,
-              radial-gradient(at 79% 82%, rgb(233, 109, 131) 0px, transparent 50%) repeat scroll 0% 0%,
-              radial-gradient(at 96% 10%, rgb(222, 81, 251) 0px, transparent 50%) repeat scroll 0% 0%,
-              radial-gradient(at 42% 20%, rgb(116, 240, 251) 0px, transparent 50%) repeat scroll 0% 0%,
-              radial-gradient(at 4% 49%, rgb(203, 88, 218) 0px, transparent 50%) repeat scroll 0% 0%, rgba(0, 0, 0, 0) radial-gradient(at 57% 33%, rgb(218, 83, 228) 0px, #a299ff 50%) repeat scroll 0% 0%;
-  background-attachment: fixed;
-  padding: 20px; /* Adjust padding as needed */
-  width: 100vw; /* Set width to viewport width */
-  box-sizing: border-box; /* Include padding in width calculation */
-}
-
-    .center {
-          margin-left: auto;
-          margin-right: auto;
+        td{
+            padding: .5rem 0.2rem;
+            max-width: 100%;
+            overflow: hidden;
+            vertical-align: top;
         }
-    table, th, tr, td {
-      border: 1px solid;
-    }
-    table {
-      width: 80%;
-    }
-    tr{
-        height: 80px;
-    }
-    th, td{
-        text-align: center;
-    }
-    .animate-charcter
-    {
-       text-transform: uppercase;
-      background-image: linear-gradient(
-        -225deg,
-        #231557 0%,
-        #44107a 29%,
-        #ff1361 67%,
-        #fff800 100%
-      );
-      background-size: auto auto;
-      background-clip: border-box;
-      background-size: 200% auto;
-      color: #fff;
-      background-clip: text;
-      text-fill-color: transparent;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: textclip 2s linear infinite;
-      display: inline-block;
-          font-size: 60px;
-    }
-
-    @keyframes textclip {
-      to {
-        background-position: 200% center;
-      }
-    }
+        tr td:first-child{
+            font-weight: bold;
+        }
+        .product-container{
+            background: rgb(240, 240, 240);
+            opacity: 1;
+            backdrop-filter: blur(16px);
+        }
 
     </style>
     </body>

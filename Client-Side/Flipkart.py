@@ -82,7 +82,7 @@ def scrape_product_details_flipkart(product_link):
             "Name": name,
             "Price": price,
             "Rating": rating,
-            "Reviews": reviews,
+            "Reviews": reviews[0][:105] + "...",
             "Product Link": product_link,
             "Image": image
         }
