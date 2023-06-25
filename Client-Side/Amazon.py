@@ -91,7 +91,7 @@ def web_scraping_amazon(product_link):
             product_info = scrape_product_details_amazon(final_product_link)
             related_products.append(product_info)
 
-        if len(related_products) == 5:
+        if len(related_products) == 1:
             return related_products
     return related_products
 
