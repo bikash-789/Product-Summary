@@ -2,9 +2,6 @@ from Amazon import web_scraping_amazon
 from Flipkart import web_scraping_flipkart
 
 import openai
-import os
-
-from dotenv import load_dotenv, find_dotenv
 
 
 def get_completion(prompt, model="gpt-3.5-turbo"):
@@ -18,8 +15,8 @@ def get_completion(prompt, model="gpt-3.5-turbo"):
 
 
 def Summarize(content):
-    _ = load_dotenv(find_dotenv())
-    openai.api_key = os.getenv('OPENAI_API_KEY')
+    # _ = load_dotenv(find_dotenv())
+    openai.api_key = ''
 
     prod_review = content
 

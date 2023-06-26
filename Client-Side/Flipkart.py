@@ -76,7 +76,8 @@ def scrape_product_details_flipkart(product_link):
             reviews = review_collection
         if len(image_element) != 0:
             image = image_element[0].get_attribute('src')
-
+        if image == None:
+            image = "./default.jpeg"
         #         Create a dictionary for data info
         product_info = {
             "Name": name,

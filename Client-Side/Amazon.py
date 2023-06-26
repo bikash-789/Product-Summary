@@ -24,9 +24,11 @@ def scrape_product_details_amazon(product_link):
 
         name_element = web_driver.find_elements(by='xpath', value='.//span[@id="productTitle"]')
         price_element = web_driver.find_elements(by='xpath', value='.//span[@class="a-price-whole"]')
-        review_elements = web_driver.find_elements(by='xpath', value='.//div[@data-hook="review-collapsed" or @data-hook="mobley-review-content"]')
+        review_elements = web_driver.find_elements(by='xpath',
+                                                   value='.//div[@data-hook="review-collapsed" or @data-hook="mobley-review-content"]')
         rating_element = web_driver.find_elements(by='xpath', value='.//a[@class="a-popover-trigger a-declarative"]')
-        image_element = web_driver.find_elements(by='xpath', value='.//img[@class="a-dynamic-image a-stretch-vertical"]')
+        image_element = web_driver.find_elements(by='xpath',
+                                                 value='.//img[@class="a-dynamic-image a-stretch-vertical"]')
 
         review_collection = []
         for review_element in review_elements:
@@ -49,7 +51,8 @@ def scrape_product_details_amazon(product_link):
             reviews = review_collection
         if len(image_element) != 0:
             image = image_element[0].get_attribute('src')
-
+        if image == None:
+            image = "./default.jpeg"
         #         Create a dictionary for data info
         product_info = {
             "Name": name,
@@ -79,7 +82,8 @@ def web_scraping_amazon(product_link):
 
     # Here, as of now we'll return only 5 products details as it takes time to scrape the data
     for product in product_elements:
-        product_detail_link = product.find_elements(by='xpath', value='.//a[@class="a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal"]')
+        product_detail_link = product.find_elements(by='xpath',
+                                                    value='.//a[@class="a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal"]')
 
         final_product_link = None
         if len(product_detail_link) != 0:
