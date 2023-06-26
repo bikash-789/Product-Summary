@@ -18,39 +18,46 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+<!--        Tailwind CSS-->
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
+
     <div class="container py-5">
         <div class="row">
-            <div class="col-12 col-md-6">
-                <h1>Amazon Search Results</h1>
+            <div class="col-12 col-lg-6">
+                <h1 class="text-xl">Amazon Search Results</h1>
                 {% for product in amazon %}
         <!--    Product  -->
         <div class="row p-4 product-container">
-            <div class="col-6">
-                <div class="card" style="width: 14rem;">
-                    <img src="{{product['Image']}}" class="card-img-top" alt="product-image">
-                    <div class="card-body">
-                        <h5 class="card-title">{{product['Name']}}</h5>
-                        <p class="card-text"><i class="bi bi-currency-rupee"></i> {{product['Price']}}</p>
-                        <a href="{{product['Product Link']}}" class="btn btn-primary">Visit Site</a>
+            <div class="col-12 col-sm-6 h-[345px] sm:shadow-md px-0">
+                    <div class="overflow-hidden h-[176px]">
+                      <img src="{{ product['Image'] | default:'./default.jpeg' }}" class="object-cover h-full w-full" alt="product-image"/>
                     </div>
-                </div>
+                    <div class="flex flex-col p-2 gap-y-2">
+                        <h4 class="font-bold text-clip overflow-scroll h-[60px]">{{product['Name']}}</h4>
+                        <h6>₹{{product['Price']}}</h6>
+                        <br/>
+                        <button class="bg-orange-400 w-25 text-white"><a href="{{product['Product Link']}}" style="text-decoration: none;">Visit Site</a></button>
+                    </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-sm-6 text-sm px-0">
 <!--                Intro   -->
                 <div class="container">
-                    <h2>Intro</h2>
-                    <p>{{product['Name']}}</p>
+                    <h2 class="font-bold">Intro</h2>
+                    <p class="text-clip overflow-scroll h-[60px]">
+                        {{product['Name']}}
+                    </p>
                 </div>
+                <br/>
 <!--                Product Information -->
                 <div class="container d-flex flex-column">
-                    <h5>Product Information</h5>
+                    <h5 class="font-bold">Product Information</h5>
                     <table>
                         <tbody>
                         <tr>
                             <td>Price</td>
-                            <td>{{product['Price']}}</td>
+                            <td>₹{{product['Price']}}</td>
                         </tr>
                         <tr>
                             <td>Rating</td>
@@ -58,8 +65,8 @@
                         </tr>
                         <tr>
                             <td>Reviews</td>
-                            <td class="w-100 text-wrap text-break">
-                                <p>
+                            <td class="w-100">
+                                <p class="text-clip overflow-scroll h-[60px]">
                                 {{product['Reviews']}}
                                 </p>
                             </td>
@@ -77,30 +84,34 @@
             {% endfor %}
             </div>
 
-            <div class="col-12 col-md-6">
-                <h1>Flipkart Search Results</h1>
+            <div class="col-12 col-lg-6">
+                <h1 class="text-xl">Flipkart Search Results</h1>
                 {% for product in flipkart %}
         <!--    Product  -->
         <div class="row p-4 product-container">
-            <div class="col-6">
-                <div class="card" style="width: 14rem;">
-                    <img src="{{product['Image']}}" class="card-img-top" alt="product-image">
-                    <div class="card-body">
-                        <h5 class="card-title">{{product['Name']}}</h5>
-                        <p class="card-text"><i class="bi bi-currency-rupee"></i> {{product['Price']}}</p>
-                        <a href="{{product['Product Link']}}" class="btn btn-primary">Visit Site</a>
+            <div class="col-12 col-sm-6 h-[345px] sm:shadow-md px-0">
+                    <div class="overflow-hidden h-[176px]">
+                        <img src="{{product['Image']}}" class="object-cover h-full w-full" alt="product-image"/>
                     </div>
-                </div>
+                    <div class="flex flex-col p-2 gap-y-2">
+                        <h4 class="font-bold text-clip overflow-scroll h-[60px]">{{product['Name']}}</h4>
+                        <h6>₹{{product['Price']}}</h6>
+                        <br/>
+                        <button class="bg-orange-400 w-25 text-white"><a href="{{product['Product Link']}}" style="text-decoration: none;">Visit Site</a></button>
+                    </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-sm-6 text-sm px-0">
 <!--                Intro   -->
                 <div class="container">
-                    <h2>Intro</h2>
-                    <p>{{product['Name']}}</p>
+                    <h2 class="font-bold">Intro</h2>
+                    <p class="text-clip overflow-scroll h-[60px]">
+                        {{product['Name']}}
+                    </p>
                 </div>
+                <br/>
 <!--                Product Information -->
                 <div class="container d-flex flex-column">
-                    <h5>Product Information</h5>
+                    <h5 class="font-bold">Product Information</h5>
                     <table>
                         <tbody>
                         <tr>
@@ -113,8 +124,8 @@
                         </tr>
                         <tr>
                             <td>Reviews</td>
-                            <td class="w-100 text-wrap text-break">
-                                <p>
+                            <td class="w-100">
+                                <p class="text-clip overflow-scroll h-[60px]">
                                 {{product['Reviews']}}
                                 </p>
                             </td>

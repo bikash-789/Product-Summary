@@ -82,7 +82,7 @@ def scrape_product_details_flipkart(product_link):
             "Name": name,
             "Price": price,
             "Rating": rating,
-            "Reviews": reviews[0][:105] + "...",
+            "Reviews": reviews,
             "Product Link": product_link,
             "Image": image
         }
@@ -121,7 +121,7 @@ def web_scraping_flipkart(product_link):
             product_info = scrape_product_details_flipkart(final_product_link)
             related_products.append(product_info)
 
-        if len(related_products) == 5:
+        if len(related_products) == 1:
             return related_products
     return related_products
 

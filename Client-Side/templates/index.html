@@ -19,6 +19,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -71,15 +72,13 @@
             <div class="container search-table">
                     <div class="search-box">
                         <div class="row">
-                            <div class="col-md-3">
-                                <h5>Search Product Name</h5>
+                            <div class="col-md-4">
+                                <h5 class="text-center">Search for Products</h5>
                             </div>
-                            <div class="col-md-9">
-                                <form action="/search/products" method="post">
-                                    <center>
-                                    <input type="text" name="key" id="search_text" class="form-control" placeholder="What are you looking for?   Eg: Vivo Z1"/>
-                                        <br>
-                                    <button class="hover-button" type="submit">Search</button></center>
+                            <div class="col-md-8">
+                                <form action="/search/products" method="post" class="flex">
+                                    <input type="text" name="key" id="search_text" class="form-control w-75" placeholder="What are you looking for?   Eg: Vivo Z1"/>
+                                    <button class="hover-button hover:bg-gray-200 mx-2" type="submit"><i class="bi bi-search"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -93,10 +92,6 @@
               padding: 10px 20px;
               border: none;
               cursor: pointer;
-            }
-
-            .hover-button:hover {
-              background-color:  #00ffff;
             }
 
             .search-table{
