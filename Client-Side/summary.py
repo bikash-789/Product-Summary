@@ -5,7 +5,7 @@ import os
 # _ = load_dotenv(find_dotenv())
 
 
-openai.api_key = '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'
+openai.api_key = ''
 
 def get_completion(prompt, model="gpt-3.5-turbo"):
     messages = [{"role": "user", "content": prompt}]
